@@ -14,12 +14,10 @@ export class TodosComponent implements OnInit {
   ngOnInit() {
     this.todos = [
       {
-         text: "hello",
-         age: "20"
+         text: "hello"
       },
       {
-        text: "kamal",
-        age: "20"
+        text: "kamal"
       }
     ];
     console.log('todos on Init Call');
@@ -31,6 +29,17 @@ export class TodosComponent implements OnInit {
       text: this.text
     });
     
+  }
+  // delete do to
+  deleteTodo(todoText)
+  {
+    for(var i= 0; i< this.todos.length; i++)
+    {
+      if(this.todos[i].text == todoText)
+        {
+          this.todos.splice(i,1);
+        }
+    }
   }
 
 }

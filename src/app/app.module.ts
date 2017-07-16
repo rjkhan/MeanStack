@@ -12,7 +12,7 @@ import { TodosComponent } from './todos/todos.component';
   ],
   imports: [
     BrowserModule,
-    FormsModule
+    FormsModule //fom module manually added
   ],
   providers: [],
   bootstrap: [AppComponent]
