@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {TodoService} from '../todo.service';
 
 @Component({
   moduleId: module.id,
@@ -9,37 +10,49 @@ import { Component, OnInit } from '@angular/core';
 export class TodosComponent implements OnInit {
   todos;
   text;
-  constructor() { }
+  appState = 'default';
+  oldText ;
+  constructor(private _todoService: TodoService) { }
 
   ngOnInit() {
-    this.todos = [
-      {
-         text: "hello"
-      },
-      {
-        text: "kamal"
-      }
-    ];
+    this._todoService.loadOrInitlizeTodos();
+    this.todos = this._todoService.getTodoList();
+  
     console.log('todos on Init Call');
   }
 
   addTodo()
   {
-    this.todos.push({
+    var newTodo = {
       text: this.text
-    });
+    };
+    this.todos.push(newTodo);
+    this.text = "";
+    this._todoService.addNewTodo(newTodo);
     
   }
   // delete do to
   deleteTodo(todoText)
   {
-    for(var i= 0; i< this.todos.length; i++)
-    {
-      if(this.todos[i].text == todoText)
-        {
-          this.todos.splice(i,1);
-        }
-    }
+    this.todos = this._todoService.deleteTodoFromLocalStorage(todoText);
+  }
+
+  editTodo(todoText)
+  {
+    this.appState = "edit";
+    this.text = todoText;
+    this.oldText = todoText;
+    console.log(this.appState);
+    // console.log(todoText);
+  }
+
+  updateTodo(){
+    console.log(this.text);
+    console.log(this.oldText);
+
+    this.todos = this._todoService.updateTodoInList(this.text, this.oldText);
+    this.text = "";
+    this.appState = 'default';
   }
 
 }
