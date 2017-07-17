@@ -1,5 +1,6 @@
 {
   "name": "blog-application",
+  "postinstall": "ng build --aot -prod", // for build
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
@@ -23,7 +24,9 @@
     "@angular/router": "^4.0.0",
     "core-js": "^2.4.1",
     "rxjs": "^5.1.0",
-    "zone.js": "^0.8.4"
+    "zone.js": "^0.8.4",
+    // angular cli version for heroku 
+    "angular-cli": "1.0.0-beta.28.3"
   },
   "devDependencies": {
     "@angular/cli": "1.2.1",
@@ -46,4 +49,5 @@
     "tslint": "~5.3.2",
     "typescript": "~2.3.3"
   }
+ 
 }
